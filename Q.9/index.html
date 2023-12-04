@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:,">
+    <title>API Fetch</title>
+</head>
+<body>
+    <div id="output"></div>
+
+    <script>
+        // Define the API endpoint URL with an invalid ID to simulate an error
+        const apiUrl = "https://jsonplaceholder.typicode.com/posts/123456789";
+
+        // Use the Fetch method to make a GET request to the API
+        fetch(apiUrl)
+        .then((response) => {
+            // Check if the response is successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            // Parse the JSON response
+            return response.json();
+        })
+        .then((data) => {
+            // Log the data to the console (won't be reached due to the error)
+            console.log(data);
+        })
+        .catch((error) => {
+            // Handle any errors that occur during the fetch
+            console.error("Fetch error:", error);
+
+            // Display an error message on the website
+            const outputElement = document.getElementById("output");
+            outputElement.textContent = `Error: ${error.message}`;
+        });
+    </script>
+</body>
+</html>
